@@ -31,7 +31,7 @@ class StockMarketWebSocketImpl(
         .build()
 
     private val openConnectionRequest = Request.Builder()
-        .url(TRADE_REPUBLIC_SOCKET_URL)
+        .url(WEB_SOCKET_URL)
         .build()
 
     private lateinit var webSocket: WebSocket
@@ -85,6 +85,6 @@ class StockMarketWebSocketImpl(
 
     companion object {
         const val CLOSE_CONNECTION_TIMEOUT = 1000
-        const val TRADE_REPUBLIC_SOCKET_URL = "ws://159.89.15.214:8080/"
+        const val WEB_SOCKET_URL = "ws://159.89.15.214:8080/"
     }
 }

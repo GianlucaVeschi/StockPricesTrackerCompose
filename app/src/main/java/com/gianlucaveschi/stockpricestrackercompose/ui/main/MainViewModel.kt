@@ -20,7 +20,7 @@ class MainViewModel : ViewModel() {
     val tickerStateFlow: StateFlow<TickerUiModel> = _tickerStateFlow
 
     @ExperimentalSerializationApi
-    private val tradeRepublicWebSocketImpl = StockMarketWebSocketImpl()
+    private val stockMarketWebSocketImpl = StockMarketWebSocketImpl()
 
     fun init() {
         Timber.d("init")
@@ -31,7 +31,7 @@ class MainViewModel : ViewModel() {
     @ExperimentalCoroutinesApi
     @ExperimentalSerializationApi
     private fun initWebSocket() {
-        tradeRepublicWebSocketImpl.observeTickerUpdates().onEach { ticker ->
+        stockMarketWebSocketImpl.observeTickerUpdates().onEach { ticker ->
             _tickerStateFlow.value = ticker.mapToUiModel()
             Timber.d("Collecting $ticker")
         }.catch { error ->
@@ -46,7 +46,7 @@ class MainViewModel : ViewModel() {
     private fun subscribeToAllTickers() {
         tickersList.forEach {
             Timber.d("Subscribe to $it")
-            tradeRepublicWebSocketImpl.subscribeToTicker(it.mapToTicketSubscription())
+            stockMarketWebSocketImpl.subscribeToTicker(it.mapToTicketSubscription())
         }
     }
 }
