@@ -1,6 +1,5 @@
 package com.gianlucaveschi.stockpricestrackercompose.network
 
-import com.gianlucaveschi.stockpricestrackercompose.BuildConfig
 import com.gianlucaveschi.stockpricestrackercompose.model.TickerApiModel
 import com.gianlucaveschi.stockpricestrackercompose.model.TickerSubscription
 import com.gianlucaveschi.stockpricestrackercompose.model.TickerUnsubscription
@@ -13,27 +12,17 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.*
-import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber
 
 @ExperimentalSerializationApi
 @ExperimentalCoroutinesApi
-class StockMarketWebSocketImpl() : StockMarketWebSocket {
-
-    private val logger = HttpLoggingInterceptor().setLevel(
-        if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BASIC
-        else HttpLoggingInterceptor.Level.NONE
-    )
-    private val client: OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(logger)
-        .build()
-
-    private val openConnectionRequest = Request.Builder()
-        .url(WEB_SOCKET_URL)
-        .build()
+class StockMarketWebSocketImpl(
+    private val client: OkHttpClient,
+    private val openConnectionRequest: Request,
+    private val jsonEncoder : Json
+) : StockMarketWebSocket {
 
     private lateinit var webSocket: WebSocket
-    private val jsonEncoder: Json = Json
 
     /**
      * callbackFlow converts a multi-shot callback into a flow
