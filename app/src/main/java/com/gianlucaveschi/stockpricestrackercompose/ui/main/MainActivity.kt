@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -18,17 +17,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.gianlucaveschi.stockpricestrackercompose.ui.components.TickerCardSlim
-import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUiModelFactory.getHardcodedTickerUiModel
+import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUiModelFactory.getListOfHardcodedTickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.ui.theme.StockPricesTrackerComposeTheme
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
 
@@ -37,31 +29,20 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
+            val tickersList = mainViewModel.tickersList.value
+            val ticker = mainViewModel.tickerState.value
+
             StockPricesTrackerComposeTheme {
                 Surface(color = MaterialTheme.colors.background) {
                     Column {
-                        TickerList(tickers = mainViewModel.tickersList)
+                        TickerList(tickers = tickersList)
                         BottomButtons()
                     }
                 }
             }
         }
-        mainViewModel.init()
-        collectTickerUpdates()
     }
-
-    private fun collectTickerUpdates(){
-        lifecycleScope.launch {
-            mainViewModel.tickerStateFlow
-                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED) //Avoid collecting flows when UI is in the background
-                .onEach {
-                    Timber.d("Collecting $it")
-                    //Update List
-
-                }.launchIn(lifecycleScope)
-        }
-    }
-
 }
 
 @Composable
@@ -69,7 +50,7 @@ fun TickerList(tickers: List<TickerUiModel>) {
     LazyColumn {
         itemsIndexed(
             items = tickers
-        ) { index, ticker ->
+        ) { _, ticker ->
             TickerCardSlim(ticker = ticker) {
                 /*Toast.makeText(this,"Hello",Toast.LENGTH_SHORT).show() */
             }
@@ -109,7 +90,7 @@ fun BottomButtons() {
 fun DefaultPreview() {
     StockPricesTrackerComposeTheme {
         Column {
-            TickerList(tickers = getHardcodedTickerUiModel())
+            TickerList(tickers = getListOfHardcodedTickerUiModel())
             BottomButtons()
         }
     }

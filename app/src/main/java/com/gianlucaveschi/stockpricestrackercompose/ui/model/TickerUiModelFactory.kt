@@ -4,7 +4,7 @@ import java.security.SecureRandom
 
 object TickerUiModelFactory {
 
-    fun getHardcodedTickerUiModel(): MutableList<TickerUiModel> = mutableListOf(
+    fun getListOfHardcodedTickerUiModel(): MutableList<TickerUiModel> = mutableListOf(
         TickerUiModel("Apple Inc.", "US0378331005", getRandomDouble()),
         TickerUiModel("Microsoft Corp.", "US5949181045", getRandomDouble()),
         TickerUiModel("Invesco Ltd.", "BMG491BT1088", getRandomDouble()),
@@ -21,5 +21,7 @@ object TickerUiModelFactory {
     )
 
     private fun getRandomDouble() = SecureRandom().nextInt(100).toDouble()
+
+    fun getHardcodedTickerUiModel() = TickerUiModel("Apple Inc.", "US0378331005", getRandomDouble())
 
 }

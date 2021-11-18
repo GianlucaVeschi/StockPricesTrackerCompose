@@ -1,5 +1,7 @@
 package com.gianlucaveschi.stockpricestrackercompose.ui.main
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gianlucaveschi.stockpricestrackercompose.ui.components.network.StockMarketWebSocketImpl
@@ -7,6 +9,7 @@ import com.gianlucaveschi.stockpricestrackercompose.ui.mappers.mapToTicketSubscr
 import com.gianlucaveschi.stockpricestrackercompose.ui.mappers.mapToUiModel
 import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUiModelFactory.getHardcodedTickerUiModel
+import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUiModelFactory.getListOfHardcodedTickerUiModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -14,44 +17,34 @@ import timber.log.Timber
 
 class MainViewModel : ViewModel() {
 
-    var tickersList: MutableList<TickerUiModel> = getHardcodedTickerUiModel()
-
-    private val _tickerStateFlow = MutableStateFlow(TickerUiModel("Apple Inc.", "US0378331005"))
-    val tickerStateFlow: StateFlow<TickerUiModel> = _tickerStateFlow
-
-    @ExperimentalSerializationApi
+    //ToDo Inject
     private val stockMarketWebSocketImpl = StockMarketWebSocketImpl()
 
-    fun init() {
-        Timber.d("init")
-        initWebSocket()
-        subscribeToAllTickers()
-    }
+    val tickersList: MutableState<MutableList<TickerUiModel>> = mutableStateOf(getListOfHardcodedTickerUiModel())
+    val tickerState : MutableState<TickerUiModel> = mutableStateOf(getHardcodedTickerUiModel())
 
-    @ExperimentalCoroutinesApi
-    @ExperimentalSerializationApi
-    private fun initWebSocket() {
-        stockMarketWebSocketImpl.observeTickerUpdates().onEach { ticker ->
-            _tickerStateFlow.value = ticker.mapToUiModel()
-            Timber.d("Collecting $ticker")
-        }.catch { error ->
-            Timber.d("Collecting failed with ${error.message}")
-        }.launchIn(viewModelScope)
-
+    init {
         subscribeToAllTickers()
     }
 
     @ExperimentalCoroutinesApi
     @ExperimentalSerializationApi
     private fun subscribeToAllTickers() {
-        tickersList.forEach {
+        stockMarketWebSocketImpl.observeTickerUpdates().onEach { ticker ->
+            tickersList.value.updateTicker(ticker.mapToUiModel())
+            tickerState.value = ticker.mapToUiModel()
+        }.catch { error ->
+            Timber.d("Collecting failed with ${error.message}")
+        }.launchIn(viewModelScope)
+
+        tickersList.value.forEach {
             Timber.d("Subscribe to $it")
             stockMarketWebSocketImpl.subscribeToTicker(it.mapToTicketSubscription())
         }
     }
 }
 
-private fun MutableList<TickerUiModel>.updateTicker(ticker: TickerUiModel) : Int {
+private fun MutableList<TickerUiModel>.updateTicker(ticker: TickerUiModel): Int {
     val indexOfTicket = this.getTickerIndex(ticker)
     this[indexOfTicket] = ticker
     return indexOfTicket
