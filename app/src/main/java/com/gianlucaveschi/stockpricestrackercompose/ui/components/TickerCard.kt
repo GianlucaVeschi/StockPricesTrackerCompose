@@ -10,7 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUiModel
+import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUiModelFactory.getHardcodedTickerUiModel
+import com.gianlucaveschi.stockpricestrackercompose.ui.util.getFormattedPrice
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import timber.log.Timber
 import java.security.SecureRandom
 
 @Composable
@@ -38,7 +41,6 @@ fun TickerCardSlim(
                 Text(
                     text = ticker.name,
                     modifier = Modifier
-                        //.fillMaxWidth(0.85f)
                         .wrapContentWidth(Alignment.Start)
                         .align(Alignment.CenterVertically),
                     style = MaterialTheme.typography.h5
@@ -46,29 +48,13 @@ fun TickerCardSlim(
 
                 Spacer(modifier = Modifier.width(30.dp))
                 Text(
-                    text = "${ticker.price}€",
+                    text = ticker.price.getFormattedPrice(),
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentWidth(Alignment.End)
                         .align(Alignment.CenterVertically),
                     style = MaterialTheme.typography.h6
                 )
-
-//                val iconFilled = mutableStateOf(false)
-//                IconToggleButton(
-//                    checked = iconFilled.value,
-//                    onCheckedChange = { iconFilled.value = true }, // TODO: Add to fav list
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .wrapContentWidth(Alignment.End)
-//                        .align(Alignment.CenterVertically),
-//                    content = {
-//                        Icon(
-//                            imageVector = Icons.Default.FavoriteBorder,
-//                            contentDescription = "Add to Favorites"
-//                        )
-//                    }
-//                )
             }
         }
     }
@@ -79,12 +65,9 @@ fun TickerCardSlim(
 @Composable
 fun PreviewTickerCardSlim() {
     TickerCardSlim(
-        ticker = TickerUiModel(
-            name = "Apple Inc.",
-            isin = "12345678",
-            price = SecureRandom().nextInt(100).toDouble()
-        ),
+        ticker = getHardcodedTickerUiModel(),
         onClick = {
-            Log.d("TAG", "PreviewTickerCardSlim: ")
+            Timber.d("ToDo: ")
         })
 }
+
