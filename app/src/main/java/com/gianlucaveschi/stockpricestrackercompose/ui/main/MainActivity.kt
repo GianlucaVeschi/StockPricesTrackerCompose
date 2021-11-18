@@ -17,10 +17,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.gianlucaveschi.stockpricestrackercompose.ui.components.BottomButtons
 import com.gianlucaveschi.stockpricestrackercompose.ui.components.TickerCardSlim
+import com.gianlucaveschi.stockpricestrackercompose.ui.components.TickerList
 import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUiModelFactory.getListOfHardcodedTickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.ui.theme.StockPricesTrackerComposeTheme
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
 class MainActivity : ComponentActivity() {
 
@@ -41,57 +45,6 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun TickerList(tickers: List<TickerUiModel>) {
-    LazyColumn {
-        itemsIndexed(
-            items = tickers
-        ) { _, ticker ->
-            TickerCardSlim(ticker = ticker) {
-                /*Toast.makeText(this,"Hello",Toast.LENGTH_SHORT).show() */
-            }
-        }
-    }
-}
-
-@Composable
-fun BottomButtons() {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(170.dp),
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Button(
-            onClick = { /*TODO*/ },
-        ) {
-            Text(
-                modifier = Modifier.padding(8.dp),
-                text = "Subscribe All",
-                style = TextStyle(fontSize = 15.sp)
-            )
-        }
-        Button(
-            onClick = { /*TODO*/ },
-        ) {
-            Text(
-                modifier = Modifier.padding(8.dp),
-                text = "Unsubscribe all",
-                style = TextStyle(fontSize = 15.sp)
-            )
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    StockPricesTrackerComposeTheme {
-        Column {
-            TickerList(tickers = getListOfHardcodedTickerUiModel())
-            BottomButtons()
         }
     }
 }

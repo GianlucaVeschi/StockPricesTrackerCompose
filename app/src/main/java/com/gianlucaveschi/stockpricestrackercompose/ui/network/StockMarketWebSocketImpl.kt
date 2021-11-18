@@ -1,4 +1,4 @@
-package com.gianlucaveschi.stockpricestrackercompose.ui.components.network
+package com.gianlucaveschi.stockpricestrackercompose.ui.network
 
 import com.gianlucaveschi.stockpricestrackercompose.BuildConfig
 import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerApiModel

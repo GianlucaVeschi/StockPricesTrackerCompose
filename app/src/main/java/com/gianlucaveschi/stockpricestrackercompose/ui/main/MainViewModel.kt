@@ -4,18 +4,19 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gianlucaveschi.stockpricestrackercompose.ui.components.network.StockMarketWebSocketImpl
+import com.gianlucaveschi.stockpricestrackercompose.ui.network.StockMarketWebSocketImpl
 import com.gianlucaveschi.stockpricestrackercompose.ui.mappers.mapToTicketSubscription
 import com.gianlucaveschi.stockpricestrackercompose.ui.mappers.mapToUiModel
 import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUiModelFactory.getHardcodedTickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUiModelFactory.getListOfHardcodedTickerUiModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import timber.log.Timber
 
-class MainViewModel : ViewModel() {
+class MainViewModel() : ViewModel() {
 
     //ToDo Inject
     private val stockMarketWebSocketImpl = StockMarketWebSocketImpl()
