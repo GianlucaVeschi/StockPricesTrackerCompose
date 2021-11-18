@@ -7,15 +7,17 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.serialization.ExperimentalSerializationApi
 
 
-//@Module
-//@InstallIn(ViewModelComponent::class)
-//class AppModule {
-//
-//    @ExperimentalSerializationApi
-//    @ViewModelScoped
-//    @Provides
-//    fun provideStockMarketWebSocket() : StockMarketWebSocket = StockMarketWebSocketImpl()
-//}
+@Module
+@InstallIn(ViewModelComponent::class)
+class AppModule {
+
+    @ExperimentalCoroutinesApi
+    @ExperimentalSerializationApi
+    @ViewModelScoped
+    @Provides
+    fun provideStockMarketWebSocket() : StockMarketWebSocket = StockMarketWebSocketImpl()
+}

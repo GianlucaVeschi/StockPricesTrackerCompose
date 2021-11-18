@@ -10,6 +10,7 @@ import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToUiModel
 import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModelFactory.getHardcodedTickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModelFactory.getListOfHardcodedTickerUiModel
+import com.gianlucaveschi.stockpricestrackercompose.network.StockMarketWebSocket
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
@@ -17,9 +18,11 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainViewModel() : ViewModel() {
-
-    private val stockMarketWebSocketImpl = StockMarketWebSocketImpl()
+@ExperimentalCoroutinesApi
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val stockMarketWebSocketImpl: StockMarketWebSocket
+) : ViewModel() {
 
     val tickersList: MutableState<MutableList<TickerUiModel>> =
         mutableStateOf(getListOfHardcodedTickerUiModel())
