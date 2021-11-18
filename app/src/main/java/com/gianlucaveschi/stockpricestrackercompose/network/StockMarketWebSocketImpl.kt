@@ -1,9 +1,9 @@
-package com.gianlucaveschi.stockpricestrackercompose.ui.network
+package com.gianlucaveschi.stockpricestrackercompose.network
 
 import com.gianlucaveschi.stockpricestrackercompose.BuildConfig
-import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerApiModel
-import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerSubscription
-import com.gianlucaveschi.stockpricestrackercompose.ui.model.TickerUnsubscription
+import com.gianlucaveschi.stockpricestrackercompose.model.TickerApiModel
+import com.gianlucaveschi.stockpricestrackercompose.model.TickerSubscription
+import com.gianlucaveschi.stockpricestrackercompose.model.TickerUnsubscription
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -18,9 +18,7 @@ import timber.log.Timber
 
 @ExperimentalSerializationApi
 @ExperimentalCoroutinesApi
-class StockMarketWebSocketImpl(
-
-) : StockMarketWebSocket {
+class StockMarketWebSocketImpl() : StockMarketWebSocket {
 
     private val logger = HttpLoggingInterceptor().setLevel(
         if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BASIC

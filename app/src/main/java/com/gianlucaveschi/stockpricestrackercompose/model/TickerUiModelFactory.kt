@@ -1,4 +1,4 @@
-package com.gianlucaveschi.stockpricestrackercompose.ui.model
+package com.gianlucaveschi.stockpricestrackercompose.model
 
 import java.security.SecureRandom
 

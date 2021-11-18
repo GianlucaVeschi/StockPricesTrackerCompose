@@ -1,4 +1,4 @@
-package com.gianlucaveschi.stockpricestrackercompose.ui.util
+package com.gianlucaveschi.stockpricestrackercompose.util
 
 
 fun Double?.getFormattedPrice() : String = this?.shorten(2) ?: "0.00"

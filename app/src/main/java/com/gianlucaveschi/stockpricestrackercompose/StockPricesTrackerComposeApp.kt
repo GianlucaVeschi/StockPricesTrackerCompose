@@ -1,4 +1,4 @@
-package com.gianlucaveschi.stockpricestrackercompose.ui
+package com.gianlucaveschi.stockpricestrackercompose
 
 import android.app.Application
 import com.gianlucaveschi.stockpricestrackercompose.BuildConfig
