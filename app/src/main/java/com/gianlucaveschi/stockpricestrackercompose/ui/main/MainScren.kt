@@ -1,4 +1,4 @@
-package com.gianlucaveschi.stockpricestrackercompose.ui.components
+package com.gianlucaveschi.stockpricestrackercompose.ui.main
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,16 +13,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModelFactory
+import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModelFactory.getListOfHardcodedTickerUiModel
+import com.gianlucaveschi.stockpricestrackercompose.ui.components.TickerCardSlim
 import com.gianlucaveschi.stockpricestrackercompose.ui.theme.StockPricesTrackerComposeTheme
 
 @Composable
 fun TickerList(tickers: List<TickerUiModel>) {
-    LazyColumn {
-        itemsIndexed(
-            items = tickers
-        ) { _, ticker ->
-            TickerCardSlim(ticker = ticker) {
-                /*Toast.makeText(this,"Hello",Toast.LENGTH_SHORT).show() */
+    Column() {
+        LazyColumn(Modifier.weight(1f)) {
+            itemsIndexed(
+                items = tickers
+            ) { _, ticker ->
+                TickerCardSlim(ticker = ticker) {
+                    /*Toast.makeText(this,"Hello",Toast.LENGTH_SHORT).show() */
+                }
             }
         }
     }
@@ -31,8 +35,8 @@ fun TickerList(tickers: List<TickerUiModel>) {
 @Composable
 fun BottomButtons() {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(170.dp),
-        modifier = Modifier.fillMaxWidth()
+        horizontalArrangement = Arrangement.spacedBy(106.dp),
+        modifier = Modifier.wrapContentHeight()
     ) {
         Button(
             onClick = { /*TODO*/ },
@@ -47,7 +51,7 @@ fun BottomButtons() {
             onClick = { /*TODO*/ },
         ) {
             Text(
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.padding(9.dp),
                 text = "Unsubscribe all",
                 style = TextStyle(fontSize = 15.sp)
             )
@@ -55,13 +59,20 @@ fun BottomButtons() {
     }
 }
 
+@Composable
+fun MainScreen() {
+    Column {
+        TickerList(
+            tickers = getListOfHardcodedTickerUiModel()
+        )
+        BottomButtons()
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     StockPricesTrackerComposeTheme {
-        Column {
-            TickerList(tickers = TickerUiModelFactory.getListOfHardcodedTickerUiModel())
-            BottomButtons()
-        }
+        MainScreen()
     }
 }
