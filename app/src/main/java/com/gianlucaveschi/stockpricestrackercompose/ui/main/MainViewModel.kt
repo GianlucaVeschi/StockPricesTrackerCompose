@@ -18,7 +18,6 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import timber.log.Timber
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val stockMarketWebSocketImpl: StockMarketWebSocket
@@ -32,8 +31,6 @@ class MainViewModel @Inject constructor(
         subscribeToAllTickers()
     }
 
-    @ExperimentalCoroutinesApi
-    @ExperimentalSerializationApi
     private fun subscribeToAllTickers() {
         stockMarketWebSocketImpl.observeTickerUpdates().onEach { ticker ->
             tickersList.value.updateTicker(ticker.mapToUiModel())
