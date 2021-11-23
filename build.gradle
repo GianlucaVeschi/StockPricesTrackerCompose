@@ -11,7 +11,7 @@ buildscript {
         okhttp_version = "3.14.9"
         logging_interceptor_version = "4.9.1"
         scarlet_version = "0.1.12"
-        coroutines_version = "1.5.1"
+        coroutines_version = "1.5.2"
 
         mockk_version = "1.12.0"
         kotlin_test_version = "1.5.0"

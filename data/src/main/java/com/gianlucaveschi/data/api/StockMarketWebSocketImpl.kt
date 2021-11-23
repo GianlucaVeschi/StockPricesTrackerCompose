@@ -1,8 +1,8 @@
-package com.gianlucaveschi.stockpricestrackercompose.network
+package com.gianlucaveschi.data.api
 
-import com.gianlucaveschi.stockpricestrackercompose.model.TickerApiModel
-import com.gianlucaveschi.stockpricestrackercompose.model.TickerSubscription
-import com.gianlucaveschi.stockpricestrackercompose.model.TickerUnsubscription
+import com.gianlucaveschi.data.model.TickerApiModel
+import com.gianlucaveschi.data.model.TickerSubscription
+import com.gianlucaveschi.data.model.TickerUnsubscription
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow

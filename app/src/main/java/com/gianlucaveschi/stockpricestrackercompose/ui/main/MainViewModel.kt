@@ -4,17 +4,14 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gianlucaveschi.stockpricestrackercompose.network.StockMarketWebSocketImpl
 import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToTicketSubscription
-import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToUiModel
 import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModelFactory.getHardcodedTickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModelFactory.getListOfHardcodedTickerUiModel
-import com.gianlucaveschi.stockpricestrackercompose.network.StockMarketWebSocket
+import com.gianlucaveschi.data.api.StockMarketWebSocket
+import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
-import kotlinx.serialization.ExperimentalSerializationApi
 import timber.log.Timber
 import javax.inject.Inject
 
