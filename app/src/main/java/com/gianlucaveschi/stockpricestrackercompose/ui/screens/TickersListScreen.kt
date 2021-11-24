@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModel
-import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModelFactory.getListOfHardcodedTickerUiModel
+import com.gianlucaveschi.stockpricestrackercompose.model.getListOfHardcodedTickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.ui.components.TickerCardSlim
 import com.gianlucaveschi.stockpricestrackercompose.ui.theme.StockPricesTrackerComposeTheme
 

@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToTicketSubscription
 import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModel
-import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModelFactory.getHardcodedTickerUiModel
-import com.gianlucaveschi.stockpricestrackercompose.model.TickerUiModelFactory.getListOfHardcodedTickerUiModel
 import com.gianlucaveschi.data.api.StockMarketWebSocket
 import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToUiModel
+import com.gianlucaveschi.stockpricestrackercompose.model.getHardcodedTickerUiModel
+import com.gianlucaveschi.stockpricestrackercompose.model.getListOfHardcodedTickerUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
