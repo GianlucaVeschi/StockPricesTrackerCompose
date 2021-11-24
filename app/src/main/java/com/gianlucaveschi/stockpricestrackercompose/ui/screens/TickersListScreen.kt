@@ -26,7 +26,7 @@ fun TickersListScreen(tickers: List<TickerUiModel>) {
                 }
             }
         }
-        TickerSubscriptionButtons()
+        //TickerSubscriptionButtons() //So ugly please fixme
     }
 }
 

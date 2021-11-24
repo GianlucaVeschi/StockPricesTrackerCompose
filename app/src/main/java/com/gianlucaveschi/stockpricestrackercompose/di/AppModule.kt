@@ -5,6 +5,8 @@ import com.gianlucaveschi.stockpricestrackercompose.BuildConfig
 import com.gianlucaveschi.stockpricestrackercompose.StockPricesTrackerComposeApp
 import com.gianlucaveschi.data.api.StockMarketWebSocket
 import com.gianlucaveschi.data.api.StockMarketWebSocketImpl
+import com.gianlucaveschi.data.repo.MainRepository
+import com.gianlucaveschi.data.repo.MainRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +18,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -71,3 +74,16 @@ class WebSocketListenerModule {
     )
 }
 
+@Module
+@InstallIn(SingletonComponent::class)
+class RepositoryModule {
+
+    @ExperimentalSerializationApi
+    @Singleton
+    @Provides
+    fun provideMainRepository(
+        stockMarketWebSocket: StockMarketWebSocket
+    ) : MainRepository = MainRepositoryImpl(
+        stockMarketWebSocket
+    )
+}
