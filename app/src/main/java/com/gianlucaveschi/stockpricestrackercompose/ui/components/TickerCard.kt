@@ -8,8 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.gianlucaveschi.data.model.TickerUiModel
-import com.gianlucaveschi.data.model.getHardcodedTickerUiModel
+import com.gianlucaveschi.domain.model.TickerUiModel
+import com.gianlucaveschi.domain.model.getHardcodedTickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.util.getFormattedPrice
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import timber.log.Timber

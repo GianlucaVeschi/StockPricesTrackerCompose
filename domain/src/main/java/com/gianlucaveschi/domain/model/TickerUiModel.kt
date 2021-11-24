@@ -1,4 +1,4 @@
-package com.gianlucaveschi.data.model
+package com.gianlucaveschi.domain.model
 
 data class TickerUiModel(
     val name: String,

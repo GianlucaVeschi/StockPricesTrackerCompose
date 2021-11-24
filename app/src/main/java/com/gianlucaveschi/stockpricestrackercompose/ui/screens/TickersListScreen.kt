@@ -10,7 +10,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.gianlucaveschi.data.model.TickerUiModel
+import com.gianlucaveschi.domain.model.TickerUiModel
+import com.gianlucaveschi.domain.model.getListOfHardcodedTickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.ui.components.TickerCardSlim
 import com.gianlucaveschi.stockpricestrackercompose.ui.theme.StockPricesTrackerComposeTheme
 
@@ -61,7 +62,7 @@ fun TickerSubscriptionButtons() {
 @Composable
 fun DefaultPreview() {
     StockPricesTrackerComposeTheme {
-        TickersListScreen(com.gianlucaveschi.data.model.getListOfHardcodedTickerUiModel())
+        TickersListScreen(getListOfHardcodedTickerUiModel())
     }
 }
 

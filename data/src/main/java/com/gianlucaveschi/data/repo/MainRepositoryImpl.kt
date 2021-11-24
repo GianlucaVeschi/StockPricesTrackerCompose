@@ -1,7 +1,8 @@
 package com.gianlucaveschi.data.repo
 
 import com.gianlucaveschi.data.api.StockMarketWebSocket
-import com.gianlucaveschi.data.model.TickerUiModel
+import com.gianlucaveschi.domain.model.TickerUiModel
+import com.gianlucaveschi.domain.repo.MainRepository
 import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToTicketSubscription
 import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToTicketUnsubscription
 import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToUiModel

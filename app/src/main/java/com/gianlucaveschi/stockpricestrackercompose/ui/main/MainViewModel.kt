@@ -4,11 +4,10 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gianlucaveschi.data.model.TickerUiModel
-import com.gianlucaveschi.data.api.StockMarketWebSocket
-import com.gianlucaveschi.data.repo.MainRepository
-import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToTicketSubscription
-import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToUiModel
+import com.gianlucaveschi.domain.model.TickerUiModel
+import com.gianlucaveschi.domain.model.getHardcodedTickerUiModel
+import com.gianlucaveschi.domain.model.getListOfHardcodedTickerUiModel
+import com.gianlucaveschi.domain.repo.MainRepository
 import com.gianlucaveschi.stockpricestrackercompose.util.updateTicker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -21,8 +20,10 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     val tickersList: MutableState<MutableList<TickerUiModel>> =
-        mutableStateOf(com.gianlucaveschi.data.model.getListOfHardcodedTickerUiModel())
-    val tickerState: MutableState<TickerUiModel> = mutableStateOf(com.gianlucaveschi.data.model.getHardcodedTickerUiModel())
+        mutableStateOf(getListOfHardcodedTickerUiModel())
+    val tickerState: MutableState<TickerUiModel> = mutableStateOf(
+        getHardcodedTickerUiModel()
+    )
 
     init {
         subscribeToAllTickersThroughRepo()

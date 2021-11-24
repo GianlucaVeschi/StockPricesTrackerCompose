@@ -1,6 +1,6 @@
-package com.gianlucaveschi.data.repo
+package com.gianlucaveschi.domain.repo
 
-import com.gianlucaveschi.data.model.TickerUiModel
+import com.gianlucaveschi.domain.model.TickerUiModel
 import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {

@@ -1,7 +1,6 @@
 package com.gianlucaveschi.stockpricestrackercompose.util
 
-import com.gianlucaveschi.data.model.TickerUiModel
-
+import com.gianlucaveschi.domain.model.TickerUiModel
 
 fun Double?.getFormattedPrice() : String = this?.shorten(2) ?: "--"
 

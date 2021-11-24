@@ -5,8 +5,8 @@ import com.gianlucaveschi.stockpricestrackercompose.BuildConfig
 import com.gianlucaveschi.stockpricestrackercompose.StockPricesTrackerComposeApp
 import com.gianlucaveschi.data.api.StockMarketWebSocket
 import com.gianlucaveschi.data.api.StockMarketWebSocketImpl
-import com.gianlucaveschi.data.repo.MainRepository
 import com.gianlucaveschi.data.repo.MainRepositoryImpl
+import com.gianlucaveschi.domain.repo.MainRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

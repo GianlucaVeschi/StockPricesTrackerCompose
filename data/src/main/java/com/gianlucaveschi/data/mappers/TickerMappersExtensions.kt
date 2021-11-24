@@ -2,11 +2,12 @@ package com.gianlucaveschi.stockpricestrackercompose.mappers
 
 import com.gianlucaveschi.data.model.TickerApiModel
 import com.gianlucaveschi.data.model.TickerSubscription
-import com.gianlucaveschi.data.model.TickerUiModel
+import com.gianlucaveschi.domain.model.TickerUiModel
 import com.gianlucaveschi.data.model.TickerUnsubscription
+import com.gianlucaveschi.domain.model.getListOfHardcodedTickerUiModel
 
-fun TickerApiModel.mapToUiModel() = com.gianlucaveschi.data.model.TickerUiModel(
-    name = com.gianlucaveschi.data.model.getListOfHardcodedTickerUiModel()
+fun TickerApiModel.mapToUiModel() = TickerUiModel(
+    name = getListOfHardcodedTickerUiModel()
         .first { it.isin == this.isin }.name,
     isin = isin,
     price = price

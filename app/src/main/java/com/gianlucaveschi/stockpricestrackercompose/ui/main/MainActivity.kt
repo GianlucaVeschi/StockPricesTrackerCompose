@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import com.gianlucaveschi.data.model.TickerUiModel
+import com.gianlucaveschi.domain.model.TickerUiModel
 import com.gianlucaveschi.stockpricestrackercompose.ui.screens.TickersListScreen
 import dagger.hilt.android.AndroidEntryPoint
 
