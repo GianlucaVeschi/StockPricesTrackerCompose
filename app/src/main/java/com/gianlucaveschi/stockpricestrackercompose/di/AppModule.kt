@@ -48,7 +48,7 @@ class WebSocketListenerModule {
     fun provideOpenConnectionRequest(): Request {
         return Request
             .Builder()
-            .url(TRADE_REPUBLIC_SOCKET_URL)
+            .url(BuildConfig.HIDDEN_WEB_SOCKET_URL)
             .build()
     }
 
@@ -69,9 +69,5 @@ class WebSocketListenerModule {
         openConnectionRequest,
         jsonEncoder
     )
-
-    companion object {
-        const val TRADE_REPUBLIC_SOCKET_URL = "ws://159.89.15.214:8080/"
-    }
 }
 
