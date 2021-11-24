@@ -3,8 +3,8 @@ package com.gianlucaveschi.stockpricestrackercompose.di
 import android.content.Context
 import com.gianlucaveschi.stockpricestrackercompose.BuildConfig
 import com.gianlucaveschi.stockpricestrackercompose.StockPricesTrackerComposeApp
-import com.gianlucaveschi.stockpricestrackercompose.network.StockMarketWebSocket
-import com.gianlucaveschi.stockpricestrackercompose.network.StockMarketWebSocketImpl
+import com.gianlucaveschi.data.api.StockMarketWebSocket
+import com.gianlucaveschi.data.api.StockMarketWebSocketImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
