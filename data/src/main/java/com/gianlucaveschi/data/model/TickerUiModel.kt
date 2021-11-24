@@ -1,4 +1,4 @@
-package com.gianlucaveschi.stockpricestrackercompose.model
+package com.gianlucaveschi.data.model
 
 data class TickerUiModel(
     val name: String,
