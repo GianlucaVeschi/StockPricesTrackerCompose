@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gianlucaveschi.data.model.TickerUiModel
 import com.gianlucaveschi.data.api.StockMarketWebSocket
+import com.gianlucaveschi.data.repo.MainRepository
 import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToTicketSubscription
 import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToUiModel
+import com.gianlucaveschi.stockpricestrackercompose.util.updateTicker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
@@ -15,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val stockMarketWebSocketImpl: StockMarketWebSocket
+    private val mainRepository : MainRepository
 ) : ViewModel() {
 
     val tickersList: MutableState<MutableList<TickerUiModel>> =
@@ -23,30 +25,20 @@ class MainViewModel @Inject constructor(
     val tickerState: MutableState<TickerUiModel> = mutableStateOf(com.gianlucaveschi.data.model.getHardcodedTickerUiModel())
 
     init {
-        subscribeToAllTickers()
+        subscribeToAllTickersThroughRepo()
     }
 
-    private fun subscribeToAllTickers() {
-        stockMarketWebSocketImpl.observeTickerUpdates().onEach { ticker ->
-            tickersList.value.updateTicker(ticker.mapToUiModel())
-            tickerState.value = ticker.mapToUiModel()
+    private fun subscribeToAllTickersThroughRepo() {
+        mainRepository.observeTicker().onEach { ticker ->
+            tickersList.value.updateTicker(ticker)
+            tickerState.value = ticker
         }.catch { error ->
             Timber.d("Collecting failed with ${error.message}")
         }.launchIn(viewModelScope)
 
         tickersList.value.forEach {
             Timber.d("Subscribe to $it")
-            stockMarketWebSocketImpl.subscribeToTicker(it.mapToTicketSubscription())
+            mainRepository.subscribeToTicker(it)
         }
     }
-}
-
-private fun MutableList<TickerUiModel>.updateTicker(ticker: TickerUiModel): Int {
-    val indexOfTicket = this.getTickerIndex(ticker)
-    this[indexOfTicket] = ticker
-    return indexOfTicket
-}
-
-private fun MutableList<TickerUiModel>.getTickerIndex(ticker: TickerUiModel): Int {
-    return this.indexOfFirst { it.isin == ticker.isin }
 }
