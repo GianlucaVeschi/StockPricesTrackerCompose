@@ -4,6 +4,9 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gianlucaveschi.domain.interactors.ObserveTickerUpdatesUseCase
+import com.gianlucaveschi.domain.interactors.SubscribeToTickerUseCase
+import com.gianlucaveschi.domain.interactors.UnsubscribeFromTickerUseCase
 import com.gianlucaveschi.domain.model.TickerUiModel
 import com.gianlucaveschi.domain.model.getHardcodedTickerUiModel
 import com.gianlucaveschi.domain.model.getListOfHardcodedTickerUiModel
@@ -16,7 +19,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val mainRepository : MainRepository
+    private val observeTickerUpdatesUseCase: ObserveTickerUpdatesUseCase,
+    private val subscribeToTickerUseCase: SubscribeToTickerUseCase,
+    private val unsubscribeFromTickerUseCase: UnsubscribeFromTickerUseCase
 ) : ViewModel() {
 
     val tickersList: MutableState<MutableList<TickerUiModel>> =
@@ -26,20 +31,28 @@ class MainViewModel @Inject constructor(
     )
 
     init {
-        subscribeToAllTickersThroughRepo()
+        observeTickersUpdates()
+        subscribeToAllTickers()
     }
 
-    private fun subscribeToAllTickersThroughRepo() {
-        mainRepository.observeTicker().onEach { ticker ->
+    fun observeTickersUpdates() {
+        observeTickerUpdatesUseCase().onEach { ticker ->
             tickersList.value.updateTicker(ticker)
             tickerState.value = ticker
         }.catch { error ->
             Timber.d("Collecting failed with ${error.message}")
         }.launchIn(viewModelScope)
+    }
 
+    fun subscribeToAllTickers() {
         tickersList.value.forEach {
-            Timber.d("Subscribe to $it")
-            mainRepository.subscribeToTicker(it)
+            subscribeToTickerUseCase(it)
+        }
+    }
+
+    fun unsubscribeFromAllTickers() {
+        tickersList.value.forEach {
+            unsubscribeFromTickerUseCase(it)
         }
     }
 }
