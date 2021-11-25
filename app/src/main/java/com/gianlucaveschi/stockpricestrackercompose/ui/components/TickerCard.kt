@@ -23,8 +23,8 @@ fun TickerCardSlim(
         shape = MaterialTheme.shapes.small,
         modifier = Modifier
             .padding(
-                bottom = 6.dp,
-                top = 6.dp,
+                bottom = 4.dp,
+                top = 4.dp,
             )
             .fillMaxWidth()
             .clickable(onClick = onClick),
@@ -41,7 +41,7 @@ fun TickerCardSlim(
                     modifier = Modifier
                         .wrapContentWidth(Alignment.Start)
                         .align(Alignment.CenterVertically),
-                    style = MaterialTheme.typography.h5
+                    style = MaterialTheme.typography.h6
                 )
 
                 Spacer(modifier = Modifier.width(30.dp))

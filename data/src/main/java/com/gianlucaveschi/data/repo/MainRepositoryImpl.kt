@@ -3,9 +3,9 @@ package com.gianlucaveschi.data.repo
 import com.gianlucaveschi.data.api.StockMarketWebSocket
 import com.gianlucaveschi.domain.model.TickerUiModel
 import com.gianlucaveschi.domain.repo.MainRepository
-import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToTicketSubscription
-import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToTicketUnsubscription
-import com.gianlucaveschi.stockpricestrackercompose.mappers.mapToUiModel
+import com.gianlucaveschi.data.mappers.mapToTicketSubscription
+import com.gianlucaveschi.data.mappers.mapToTicketUnsubscription
+import com.gianlucaveschi.data.mappers.mapToUiModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

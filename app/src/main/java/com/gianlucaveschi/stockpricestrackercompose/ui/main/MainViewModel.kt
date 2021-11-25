@@ -10,7 +10,6 @@ import com.gianlucaveschi.domain.interactors.UnsubscribeFromTickerUseCase
 import com.gianlucaveschi.domain.model.TickerUiModel
 import com.gianlucaveschi.domain.model.getHardcodedTickerUiModel
 import com.gianlucaveschi.domain.model.getListOfHardcodedTickerUiModel
-import com.gianlucaveschi.domain.repo.MainRepository
 import com.gianlucaveschi.stockpricestrackercompose.util.updateTicker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*

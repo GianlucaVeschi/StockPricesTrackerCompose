@@ -7,10 +7,8 @@ import timber.log.Timber
 
 @HiltAndroidApp
 class StockPricesTrackerComposeApp : Application() {
-
     override fun onCreate() {
         super.onCreate()
-        // This will initialise Timber
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }

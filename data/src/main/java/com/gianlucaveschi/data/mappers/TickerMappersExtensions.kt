@@ -1,4 +1,4 @@
-package com.gianlucaveschi.stockpricestrackercompose.mappers
+package com.gianlucaveschi.data.mappers
 
 import com.gianlucaveschi.data.model.TickerApiModel
 import com.gianlucaveschi.data.model.TickerSubscription
