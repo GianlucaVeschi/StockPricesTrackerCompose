@@ -2,7 +2,7 @@
 
 This project showcases an app which displays a bunch of hardcoded stock tickers being updated automatically through a web socket using jetpack compose.
 
-![image-2](https://user-images.githubusercontent.com/19254758/143004753-cff6b68f-cb26-45c3-a57f-3656b8a3c577.png)
+![image](https://user-images.githubusercontent.com/19254758/143469005-3c248fa0-c97d-49e2-9d78-e3e7d6e3e31b.png)
 
 # Tech Stack
 - Kotlin
