@@ -41,9 +41,10 @@ This project showcases an app which displays a bunch of hardcoded stock tickers 
 - ~~Create Scarlet Service (See Scarlet ad-hoc branch)~~ Values can be collected in the VM but they do not propagate to the UI. Also unsubscribtion doesn't work.
 - ~~Inject Service in the repository~~
 - ~~Delete all unnecessary logs.~~
+- - Modularize project
 
 ## Not yet
-- Modularize project
+- Detail Screens
 
 # Resources & Credits
 
